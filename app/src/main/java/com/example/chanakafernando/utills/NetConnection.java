@@ -14,8 +14,8 @@ import com.android.volley.toolbox.Volley;
 
 public class NetConnection {
 
-        private static NetConnection mInstanse;  //ok
-        private RequestQueue requestQueue;  //ok
+        private static NetConnection mInstanse;
+        private RequestQueue requestQueue;
         private static Context mCtx;
 
 

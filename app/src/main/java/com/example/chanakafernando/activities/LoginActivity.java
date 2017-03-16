@@ -1,4 +1,4 @@
-package com.example.chanakafernando.testloging;
+package com.example.chanakafernando.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -29,8 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etPassword;
     Button bLogin;
     TextView registerLink;
-    String URL = "http://192.168.43.166:8000/android";
-
+    String URL ="http://54.68.91.2:8000/login/user";
 
 
 
@@ -67,27 +66,23 @@ public class LoginActivity extends AppCompatActivity {
          */
 
     public void userLogin(View view) {
-
-
         Map<String, String> postParam = new HashMap<String, String>();
 
-        if (Validation.isValidName(etUsername) && Validation.isValidPassword(etPassword)) {
-            // When Email entered is Valid
-            if (Validation.isValidName(etUsername)) {
+        if (Validation.isValidName(etUsername)) {
 
-
+            if(Validation.isValidPassword(etPassword)){
                 postParam.put("userName", etUsername.getText().toString());
                 postParam.put("password", etPassword.getText().toString());
-                Log.i("Data",postParam.toString());
+                Log.i("logging",postParam.toString());
                 serviceCall(postParam);
+            }else{
+                Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "8 characters must", Toast.LENGTH_SHORT).show();
             }
-            // When Username is invalid
-            else {
-                Toast.makeText(getApplicationContext(), "User name is already taken", Toast.LENGTH_LONG).show();
-            }
-        } else {
-            Toast.makeText(getApplicationContext(), "Please fill the form, don't leave any field blank", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(LoginActivity.this, "Incorrect User Name", Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
@@ -97,22 +92,24 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                     int status =200;//response.getInt("status");
-                     String msg = response.getString("message");
-                     //String err = response.getString("Error");
+                     int status =response.getInt("status");
+                     String msg = response.getString("Message");
                      Log.i("Login Response",response.toString());
-                    if(status == 200){
+
+                    if(status ==200 ){
                         Toast.makeText(LoginActivity.this, "Successfully Logged In", Toast.LENGTH_SHORT).show();
                         Intent homeIntent = new Intent(LoginActivity.this, WallpostActivity.class);
                         LoginActivity.this.startActivity(homeIntent);
 
-                    }else {
-                        Toast.makeText(LoginActivity.this, "Error Occur", Toast.LENGTH_SHORT).show();
+                    }else if(status==400){
+                        Toast.makeText(LoginActivity.this, "Incorrect User Name or Password", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(LoginActivity.this,"",Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e) {
                     Log.i("Login Response",response.toString());
-                    Toast.makeText(LoginActivity.this, "Error Occur1111"+response.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Error Occur", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
 
                 }
@@ -121,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 Toast.makeText(LoginActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }

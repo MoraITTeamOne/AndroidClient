@@ -14,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.chanakafernando.other.Movie;
-import com.example.chanakafernando.testloging.R;
+import com.example.chanakafernando.activities.R;
 
 import java.util.List;
 

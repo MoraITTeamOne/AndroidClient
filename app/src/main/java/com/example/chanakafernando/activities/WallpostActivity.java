@@ -1,9 +1,8 @@
-package com.example.chanakafernando.testloging;
+package com.example.chanakafernando.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
@@ -37,7 +36,7 @@ public class WallpostActivity extends AppCompatActivity
 
     private String TAG = WallpostActivity.class.getSimpleName();
     //private String URL_TOP_250 = "http://api.androidhive.info/json/imdb_top_250.php?offset=";
-    private String URL_TOP_250 = "http://192.168.43.166:8000/array";
+    private String URL ="http://54.68.91.2:8000/login/user";
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
     private SwipeListAdapter adapter;
@@ -82,7 +81,7 @@ public class WallpostActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(WallpostActivity.this, CommentActivity.class);
+                Intent homeIntent = new Intent(WallpostActivity.this, CommentMenuActivity.class);
                 WallpostActivity.this.startActivity(homeIntent);
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         //.setAction("Action", null).show();
@@ -112,7 +111,7 @@ public class WallpostActivity extends AppCompatActivity
         swipeRefreshLayout.setRefreshing(true);
 
         // appending offset to url
-        String url = URL_TOP_250 ;
+        String url = URL ;
 
         // Volley's json array request object
         JsonArrayRequest req = new JsonArrayRequest(url,

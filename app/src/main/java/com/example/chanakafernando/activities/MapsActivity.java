@@ -1,4 +1,4 @@
-package com.example.chanakafernando.testloging;
+package com.example.chanakafernando.activities;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;

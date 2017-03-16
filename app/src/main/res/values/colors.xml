@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#db477a</color>
+    <color name="button">#7a7577</color>
     <string-array name="movie_serial_bg">
         <item>#24c6d5</item>
         <item>#57dd86</item>

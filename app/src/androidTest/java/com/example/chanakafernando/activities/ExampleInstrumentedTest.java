@@ -1,4 +1,4 @@
-package com.example.chanakafernando.testloging;
+package com.example.chanakafernando.activities;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,12 +1,7 @@
 package com.example.chanakafernando.utills;
 
-import android.app.Activity;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.chanakafernando.testloging.LoginActivity;
-
-import java.security.PublicKey;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,7 +43,7 @@ public class Validation {
 
     public static boolean isValidName(EditText Name){
         String name = Name.getText().toString();
-        if(name.length() !=0){
+        if(name.length() < 15 && name.length() >4){
             return true;
         }
         return false;
