@@ -159,7 +159,7 @@ public class MyService extends Service
     }
 
 
-    private void serviceCall(Map<String, String> postParam) {
+   /* private void serviceCall(Map<String, String> postParam) {
         String URL =""
         JsonObjectRequest locationObject = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postParam), new Response.Listener<JSONObject>() {
             @Override
@@ -200,5 +200,5 @@ public class MyService extends Service
         });
         NetConnection.getmInstanse(LoginActivity.this).addToRequestQueue(loginDitailsObject);
 
-    }
+    }*/
 }
