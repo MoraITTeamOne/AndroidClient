@@ -10,4 +10,5 @@ public class GlobalVariables {
     public static String trainOrBus;
     public static boolean areUtravel=false;
     public static String posibleTrain;
+    public static String posibleBus;
 }

@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.chanakafernando.activities.R;
 import com.example.chanakafernando.other.GlobalVariables;
 import com.example.chanakafernando.other.Movie;
+import com.example.chanakafernando.utills.MyService;
 import com.example.chanakafernando.utills.NetConnection;
 import com.example.chanakafernando.utills.SwipeListAdapter;
 
@@ -83,6 +84,7 @@ public class Questionactivity extends AppCompatActivity implements SwipeRefreshL
                 Log.i("AA",GlobalVariables.userName);
                 Log.i("AA",GlobalVariables.trainOrBus);
 
+                startService(new Intent(Questionactivity.this, MyService.class));//start bakground service for send location
                 Intent registerIntent = new Intent(Questionactivity.this, WallpostActivity.class);
                 Questionactivity.this.startActivity(registerIntent);
 
