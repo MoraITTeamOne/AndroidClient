@@ -16,8 +16,8 @@ public class MyService extends Service
 {
     private static final String TAG = "BOOMBOOMTESTGPS";
     private LocationManager mLocationManager = null;
-    private static final int LOCATION_INTERVAL = 1000;
-    private static final float LOCATION_DISTANCE = 10f;
+    private static final int LOCATION_INTERVAL = 1000;  // minute
+    private static final float LOCATION_DISTANCE = 0;  //distance in meter
 
     private class LocationListener implements android.location.LocationListener
     {
@@ -34,6 +34,7 @@ public class MyService extends Service
         {
             Log.e(TAG, "onLocationChanged: " + location);
             mLastLocation.set(location);
+            Log.i("Location",mLastLocation.getLatitude()+" "+mLastLocation.getLongitude());
         }
 
         @Override

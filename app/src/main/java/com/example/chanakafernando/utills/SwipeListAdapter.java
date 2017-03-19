@@ -16,13 +16,11 @@ import android.widget.TextView;
 import com.example.chanakafernando.other.Movie;
 import com.example.chanakafernando.activities.R;
 
+
+
 import java.util.List;
 
 
-
-/**
- * Created by Ravi on 13/05/15.
- */
 public class SwipeListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
@@ -70,6 +68,7 @@ public class SwipeListAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 
 }
 

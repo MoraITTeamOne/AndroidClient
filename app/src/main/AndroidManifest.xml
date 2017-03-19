@@ -59,10 +59,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity
-            android:name=".sssssss"
-            android:label="@string/title_activity_sssssss"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Questionactivity"></activity>
     </application>
 
 </manifest>

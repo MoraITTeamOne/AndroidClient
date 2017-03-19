@@ -1,6 +1,9 @@
 package com.example.chanakafernando.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.BoolRes;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.chanakafernando.other.GlobalVariables;
 import com.example.chanakafernando.utills.NetConnection;
 import com.example.chanakafernando.utills.Validation;
 
@@ -30,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     Button bLogin;
     TextView registerLink;
     String URL ="http://54.68.91.2:8000/login/user";
+
 
 
 
@@ -97,9 +102,11 @@ public class LoginActivity extends AppCompatActivity {
                      Log.i("Login Response",response.toString());
 
                     if(status ==200 ){
+                        GlobalVariables.userName =etUsername.getText().toString();
+                        GlobalVariables.passWord =etPassword.getText().toString();
                         Toast.makeText(LoginActivity.this, "Successfully Logged In", Toast.LENGTH_SHORT).show();
-                        Intent homeIntent = new Intent(LoginActivity.this, WallpostActivity.class);
-                        LoginActivity.this.startActivity(homeIntent);
+                        dialogTraveling();
+
 
                     }else if(status==400){
                         Toast.makeText(LoginActivity.this, "Incorrect User Name or Password", Toast.LENGTH_SHORT).show();
@@ -125,6 +132,60 @@ public class LoginActivity extends AppCompatActivity {
         });
         NetConnection.getmInstanse(LoginActivity.this).addToRequestQueue(loginDitailsObject);
 
+    }
+
+
+    private void dialogTraveling(){
+        AlertDialog.Builder adTraveling = new AlertDialog.Builder(LoginActivity.this);
+        adTraveling.setMessage("Hey dude! Are You Traveling?");
+        adTraveling.setCancelable(true);
+        adTraveling.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        GlobalVariables.areUtravel =true;
+                        dialog.cancel();
+                        dialogTrainOrBus();
+                    }
+                });
+        adTraveling.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog dialog1 = adTraveling.create();
+        dialog1.show();
+
+    }
+
+    private void dialogTrainOrBus(){
+        AlertDialog.Builder adTrainBus = new AlertDialog.Builder(LoginActivity.this);
+        adTrainBus.setMessage("Hey Bro.. Train Or Bus?");
+        adTrainBus.setCancelable(true);
+        adTrainBus.setPositiveButton(
+                "Train",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        GlobalVariables.trainOrBus ="train";
+                        Intent homeIntent = new Intent(LoginActivity.this, Questionactivity.class);
+                        LoginActivity.this.startActivity(homeIntent);
+                    }
+                });
+        adTrainBus.setNegativeButton(
+                "Bus",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        GlobalVariables.trainOrBus="bus";
+                        Intent homeIntent = new Intent(LoginActivity.this, WallpostActivity.class);
+                        LoginActivity.this.startActivity(homeIntent);
+                    }
+                });
+        AlertDialog dialog2 = adTrainBus.create();
+        dialog2.show();
     }
 
 

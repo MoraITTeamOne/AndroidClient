@@ -1,9 +1,11 @@
 package com.example.chanakafernando.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,12 +34,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WallpostActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,SwipeRefreshLayout.OnRefreshListener {
+public class WallpostActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,SwipeRefreshLayout.OnRefreshListener {
 
     private String TAG = WallpostActivity.class.getSimpleName();
-    //private String URL_TOP_250 = "http://api.androidhive.info/json/imdb_top_250.php?offset=";
-    private String URL ="http://54.68.91.2:8000/login/user";
+    private String URL ="http://api.androidhive.info/json/imdb_top_250.php?offset=";
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
     private SwipeListAdapter adapter;
@@ -58,7 +59,6 @@ public class WallpostActivity extends AppCompatActivity
         movieList = new ArrayList<>();
         adapter = new SwipeListAdapter(this, movieList);
         listView.setAdapter(adapter);
-
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
                                     @Override
@@ -68,21 +68,16 @@ public class WallpostActivity extends AppCompatActivity
                                         fetchMovies();
                                     }
                                 }
+
         );
-
-
-
-
-
-
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent homeIntent = new Intent(WallpostActivity.this, CommentMenuActivity.class);
-                WallpostActivity.this.startActivity(homeIntent);
+                dialogTraveling();
+
+                //Intent homeIntent = new Intent(WallpostActivity.this, CommentMenuActivity.class);
+               // WallpostActivity.this.startActivity(homeIntent);
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         //.setAction("Action", null).show();
             }
@@ -98,6 +93,11 @@ public class WallpostActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
+
+
+
+
     @Override
     public void onRefresh() {
         fetchMovies();
@@ -110,11 +110,7 @@ public class WallpostActivity extends AppCompatActivity
         // showing refresh animation before making http call
         swipeRefreshLayout.setRefreshing(true);
 
-        // appending offset to url
-        String url = URL ;
-
-        // Volley's json array request object
-        JsonArrayRequest req = new JsonArrayRequest(url,
+        JsonArrayRequest req = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -229,6 +225,61 @@ public class WallpostActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void dialogTraveling(){
+        AlertDialog.Builder adTraveling = new AlertDialog.Builder(WallpostActivity.this);
+        adTraveling.setMessage("Hey dude! Are You Traveling?");
+        adTraveling.setCancelable(true);
+        adTraveling.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent homeIntent = new Intent(WallpostActivity.this, CommentMenuActivity.class);
+                        WallpostActivity.this.startActivity(homeIntent);
+                        dialog.cancel();
+
+                    }
+                });
+        adTraveling.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog dialog1 = adTraveling.create();
+        dialog1.show();
+
+    }
+
+    private void dialogTrainOrBus(){
+        AlertDialog.Builder adTrainBus = new AlertDialog.Builder(WallpostActivity.this);
+        adTrainBus.setMessage("Hey Bro.. Train Or Bus?");
+        adTrainBus.setCancelable(true);
+        adTrainBus.setPositiveButton(
+                "Train",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent homeIntent = new Intent(WallpostActivity.this, CommentMenuActivity.class);
+                        WallpostActivity.this.startActivity(homeIntent);
+                        dialog.cancel();
+                    }
+                });
+        adTrainBus.setNegativeButton(
+                "Bus",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent homeIntent = new Intent(WallpostActivity.this, CommentMenuActivity.class);
+                        WallpostActivity.this.startActivity(homeIntent);
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog dialog2 = adTrainBus.create();
+        dialog2.show();
+    }
+
+
 
 
 }

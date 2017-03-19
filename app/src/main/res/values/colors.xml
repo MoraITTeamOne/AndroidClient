@@ -12,4 +12,6 @@
         <item>#fcba59</item>
         <item>#24c6d5</item>
     </string-array>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
