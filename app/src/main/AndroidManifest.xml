@@ -60,7 +60,9 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".DestinationActivity"></activity>
+        <activity android:name=".DestinationActivity" />
+        <activity android:name=".SendPhotoActivity" />
+        <activity android:name=".ScheduleActivity"></activity>
     </application>
 
 </manifest>

@@ -14,16 +14,22 @@ import com.example.chanakafernando.activities.R;
 
 public class CommentActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+       Button button3 = (Button) findViewById(R.id.button3);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent int1 = new Intent(CommentActivity.this,SendPhotoActivity.class);
+                startActivity(int1);
+            }
+        });
 
 
 
 
-
-
-
-    }
+}
 }
