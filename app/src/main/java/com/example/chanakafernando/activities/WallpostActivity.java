@@ -206,12 +206,19 @@ public class WallpostActivity extends AppCompatActivity implements NavigationVie
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+
+
+
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent homeIntent = new Intent(WallpostActivity.this, RegisterActivity.class);
+            Intent homeIntent = new Intent(WallpostActivity.this, DestinationActivity.class);
             WallpostActivity.this.startActivity(homeIntent);
 
         } else if (id == R.id.nav_slideshow) {
+
+            Intent homeIntent = new Intent(WallpostActivity.this, ScheduleActivity.class);
+            WallpostActivity.this.startActivity(homeIntent);
+
 
         } else if (id == R.id.nav_manage) {
 

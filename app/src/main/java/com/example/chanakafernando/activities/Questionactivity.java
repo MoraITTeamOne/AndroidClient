@@ -43,8 +43,6 @@ public class Questionactivity extends AppCompatActivity implements SwipeRefreshL
     private List<Movie> movieList;
     public String posibleTrain;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.chanakafernando.activities.SendPhotoActivity"
+    tools:showIn="@layout/activity_send_photo"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/idbtn"
+        android:onClick="btnClick"
+        android:text="Launch Camera"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="395dp"
+        android:layout_height="match_parent"
+        android:background="#ccc"
+        android:gravity="center"
+        android:padding="5dp" />
+
+</LinearLayout>
