@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">testLoging</string>
+    <string name="app_name">FLASH</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -97,8 +97,6 @@
     <string name="title_activity_wall_post">WallPost</string>
     <string name="title_activity_wallpost">WallpostActivity</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_sssssss">sssssss</string>
-
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>

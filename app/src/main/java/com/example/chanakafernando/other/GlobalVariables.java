@@ -11,4 +11,7 @@ public class GlobalVariables {
     public static boolean areUtravel=false;
     public static String posibleTrain;
     public static String posibleBus;
+    public static String startLocation;
+    public static String endLocation;
+    public static String localTime;
 }
