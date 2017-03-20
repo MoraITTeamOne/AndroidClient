@@ -63,6 +63,7 @@ public class PosibleTrainListAdapter extends BaseAdapter {
         TextView tvType =(TextView)convertView.findViewById(R.id.tvType);
         TextView tvFrom =(TextView) convertView.findViewById(R.id.tvFrom);
         TextView tvTo =(TextView) convertView.findViewById(R.id.tvTo);
+        String pTrainRoutNo;
 
 
         tvTrainName.setText(pTrainList.get(position).trinName);
@@ -72,6 +73,7 @@ public class PosibleTrainListAdapter extends BaseAdapter {
         tvSlocation.setText(pTrainList.get(position).sLocation);
         tvSTime.setText(pTrainList.get(position).sTime);
         tvType.setText(pTrainList.get(position).type);
+        pTrainRoutNo =pTrainList.get(position).tRouteNo;
         tvFrom.setText("FROM");
         tvTo.setText("TO");
 

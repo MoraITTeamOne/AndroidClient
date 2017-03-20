@@ -70,6 +70,7 @@ public class Questionactivity extends AppCompatActivity  {
                 Log.i("StartLocation",GlobalVariables.endLocation);
                 Log.i("End location",GlobalVariables.startLocation);
                 getPosibleTrainList();
+                trainList.clear();
 
             }
         });
@@ -88,32 +89,21 @@ public class Questionactivity extends AppCompatActivity  {
         listView.setAdapter(adapter);
 
 
-
-
-
-            //swipeRefreshLayout.setOnRefreshListener(this);
-            /*swipeRefreshLayout.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            swipeRefreshLayout.setRefreshing(true);
-                                            getPosibleTrainList();
-                                        }
-                                    }
-
-            );*/
-
-
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                TextView textView = (TextView) view.findViewById(R.id.tvTrainName);
-                posibleTrain = textView.getText().toString();
+                TextView trainName = (TextView) view.findViewById(R.id.tvTrainName);
+                TextView trainId =(TextView) view.findViewById(R.id.tvTrainId);
+
+                String posibleTrain = trainName.getText().toString();
+                String posibleTrainId = trainId.getText().toString();
+                String trainRoute =trainList.get(position).tRouteNo;
                 Log.i("PosibleTrain",posibleTrain);
-                GlobalVariables.posibleTrain=posibleTrain;
+                GlobalVariables.posibleTrainName=posibleTrain;
+                GlobalVariables.getPosibleTrainId=posibleTrainId;
+                GlobalVariables.pTrainRouteNo =trainRoute;
 
                 Log.i("AA",GlobalVariables.passWord);
                 Log.i("AA",GlobalVariables.userName);
@@ -141,13 +131,7 @@ public class Questionactivity extends AppCompatActivity  {
 
 
     private void getPosibleTrainList() {
-
-        // showing refresh animation before making http call
         swipeRefreshLayout.setRefreshing(true);
-
-
-        Log.i("Variable",GlobalVariables.startLocation);
-        Log.i("Variables",GlobalVariables.endLocation);
         String URL ="http://54.68.91.2:8000/get/pschedule/"+GlobalVariables.startLocation+"/"+GlobalVariables.endLocation+"/"+1615;
         JsonArrayRequest req = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
@@ -167,8 +151,9 @@ public class Questionactivity extends AppCompatActivity  {
                                     String eLoc = trainObj.getString("EndLocation");
                                     String eTime = trainObj.getString("EndTime");
                                     String type = trainObj.getString("TrainType");
+                                    String tRouteNo  =trainObj.getString("RouteNo");
 
-                                    PosibleTrainList pTrain = new PosibleTrainList(trainId,trainName,sLoc,sTime,eLoc,eTime,type);
+                                    PosibleTrainList pTrain = new PosibleTrainList(trainId,trainName,sLoc,sTime,eLoc,eTime,type,tRouteNo);
 
                                     trainList.add(0, pTrain);
 
@@ -199,6 +184,7 @@ public class Questionactivity extends AppCompatActivity  {
 
         // Adding request to request queue
         NetConnection.getmInstanse(Questionactivity.this).addToRequestQueue(req);
+
 
     }
 

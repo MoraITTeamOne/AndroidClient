@@ -12,12 +12,13 @@ public class PosibleTrainList {
     public String sTime;
     public String eTime;
     public String type;
+    public String tRouteNo;
 
     public PosibleTrainList(){
 
     }
 
-    public PosibleTrainList(String trainId, String trinName,String sLocation,String sTime,String eLocation,String eTime,String type){
+    public PosibleTrainList(String trainId, String trinName,String sLocation,String sTime,String eLocation,String eTime,String type,String tRouteNo){
         this.trainId=trainId;
         this.trinName=trinName;
         this.sLocation =sLocation;
@@ -25,6 +26,7 @@ public class PosibleTrainList {
         this.eLocation=eLocation;
         this.eTime=eTime;
         this.type=type;
+        this.tRouteNo=tRouteNo;
 
 
     }

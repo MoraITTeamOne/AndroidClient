@@ -35,7 +35,6 @@ public class AccidentActivity extends AppCompatActivity {
             public void onRatingChanged(RatingBar rbAccident, float rating, boolean fromUser) {
                 String textValue =(String.valueOf((int)rating));
                 Toast.makeText(AccidentActivity.this, "Congratulation You have added +5 Reward points ", Toast.LENGTH_LONG).show();
-
                 Intent registerIntent = new Intent(AccidentActivity.this, CommentMenuActivity.class);
                 AccidentActivity.this.startActivity(registerIntent);
 

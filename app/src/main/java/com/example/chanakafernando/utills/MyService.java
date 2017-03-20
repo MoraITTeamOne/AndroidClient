@@ -51,7 +51,9 @@ public class MyService extends Service
             mLastLocation.set(location);
             double lon =mLastLocation.getLongitude();
             double lat =mLastLocation.getLatitude();
-            Log.i("Location",lon+" "+lat);
+            GlobalVariables.longitude =lon;
+            GlobalVariables.latitude =lat;
+            Log.i("GPSLocation",lon+" "+lat);
             sendLocaton(lon,lat);
         }
 
@@ -143,10 +145,13 @@ public class MyService extends Service
 
     public void sendLocaton(double lon,double lat){
         String transId;
+        String rootNo;
         if(GlobalVariables.trainOrBus == "train"){
-            transId=GlobalVariables.posibleTrain;
+            transId=GlobalVariables.getPosibleTrainId;
+            rootNo =GlobalVariables.pTrainRouteNo;
         }else{
             transId =GlobalVariables.posibleBus;
+            rootNo =GlobalVariables.pBusRouteNo;
         }
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("userName", GlobalVariables.userName);
@@ -154,13 +159,17 @@ public class MyService extends Service
         postParam.put("transId",transId);
         postParam.put("longitude",lon+"");
         postParam.put("latitude",lat+"");
+        postParam.put("RouteNo",rootNo);
+        postParam.put("time",GlobalVariables.localTime);
         Log.i("logging",postParam.toString());
+
+        sendLocationData(postParam);  // send user's location
 
     }
 
 
-   /* private void serviceCall(Map<String, String> postParam) {
-        String URL =""
+   private void sendLocationData(Map<String, String> postParam) {
+        String URL ="http://54.68.91.2:8000/post/loc";
         JsonObjectRequest locationObject = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postParam), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -170,21 +179,17 @@ public class MyService extends Service
                     Log.i("Login Response",response.toString());
 
                     if(status ==200 ){
-                        GlobalVariables.userName =etUsername.getText().toString();
-                        GlobalVariables.passWord =etPassword.getText().toString();
-                        Toast.makeText(LoginActivity.this, "Successfully Logged In", Toast.LENGTH_SHORT).show();
-                        dialogTraveling();
+                        Toast.makeText(MyService.this, "Successfully send Location data", Toast.LENGTH_SHORT).show();
 
-
-                    }else if(status==400){
-                        Toast.makeText(LoginActivity.this, "Incorrect User Name or Password", Toast.LENGTH_SHORT).show();
+                    }else if(status==500){
+                        Toast.makeText(MyService.this, "Does not save location data", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(LoginActivity.this,"",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MyService.this,"1111",Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e) {
                     Log.i("Login Response",response.toString());
-                    Toast.makeText(LoginActivity.this,"Error Occur", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyService.this,"Error Occur", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
 
                 }
@@ -194,11 +199,11 @@ public class MyService extends Service
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(LoginActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyService.this, "Something wrong", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });
-        NetConnection.getmInstanse(LoginActivity.this).addToRequestQueue(loginDitailsObject);
+        NetConnection.getmInstanse(MyService.this).addToRequestQueue(locationObject);
 
-    }*/
+    }
 }
