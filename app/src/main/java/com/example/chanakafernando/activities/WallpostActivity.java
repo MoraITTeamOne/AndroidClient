@@ -206,10 +206,11 @@ public class WallpostActivity extends AppCompatActivity implements NavigationVie
         int id = item.getItemId();
 
         if (id == R.id.nav_find_bus) {
-
+            Intent homeIntent = new Intent(WallpostActivity.this, FindBusActivity.class);
+            WallpostActivity.this.startActivity(homeIntent);
 
         } else if (id == R.id.nav_find_Train) {
-            Intent homeIntent = new Intent(WallpostActivity.this, DestinationActivity.class);
+            Intent homeIntent = new Intent(WallpostActivity.this, FindTrainActivity.class);
             WallpostActivity.this.startActivity(homeIntent);
 
         } else if (id == R.id.nav_train_schedule) {
