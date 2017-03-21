@@ -3,17 +3,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Map" />
-        <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_find_bus"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Schedules" />
+            android:title="Find a Bus" />
+        <item
+            android:id="@+id/nav_find_Train"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Find a Train" />
+        <item
+            android:id="@+id/nav_train_schedule"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Train Schedule" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

@@ -51,11 +51,10 @@ public class Questionactivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionactivity);
 
-        Log.i("Helloo","jjjj"+GlobalVariables.endLocation);
         TextView find =(TextView) findViewById(R.id.tvFind) ;
         Date dt = new Date();
         int hours = dt.getHours();
-        int minutes = dt.getMinutes() -30;
+        int minutes = dt.getMinutes();
         GlobalVariables.localTime=hours+""+minutes;
         Log.i("TIME",GlobalVariables.localTime);
 
@@ -108,6 +107,7 @@ public class Questionactivity extends AppCompatActivity  {
                 Log.i("AA",GlobalVariables.passWord);
                 Log.i("AA",GlobalVariables.userName);
                 Log.i("AA",GlobalVariables.trainOrBus);
+                Log.i("AA",GlobalVariables.pTrainRouteNo);
 
                 startService(new Intent(Questionactivity.this, MyService.class));//start bakground service for send location
                 Intent registerIntent = new Intent(Questionactivity.this, WallpostActivity.class);

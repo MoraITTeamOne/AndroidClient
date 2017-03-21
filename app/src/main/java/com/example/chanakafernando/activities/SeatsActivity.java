@@ -36,9 +36,36 @@ public class SeatsActivity extends AppCompatActivity {
 
         rbAccident.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             public void onRatingChanged(RatingBar rbAccident, float rating, boolean fromUser) {
-                String rateValue =(String.valueOf((int)rating));
+                String rankValue =(String.valueOf((int)rating));
 
-                ranking(rateValue);
+                Map<String, String> rankingData = new HashMap<String, String>();
+                String transId ="";
+                String rootNo ="";
+                String trainName ="";
+                if(GlobalVariables.trainOrBus == "train"){
+                    transId=GlobalVariables.getPosibleTrainId;
+                    rootNo =GlobalVariables.pTrainRouteNo;
+                    trainName =GlobalVariables.posibleTrainName;
+                }else{
+                    transId =GlobalVariables.posibleBus;
+                    rootNo =GlobalVariables.pBusRouteNo;
+                }
+                Map<String, String> locationData = new HashMap<String, String>();
+                rankingData.put("userName", GlobalVariables.userName);
+                rankingData.put("time",GlobalVariables.localTime );
+                rankingData.put("longitude",GlobalVariables.longitude+"");
+                rankingData.put("latitude",GlobalVariables.latitude+"");
+                rankingData.put("transId",transId);
+                rankingData.put("RouteNo",rootNo);
+                rankingData.put("transName",trainName);
+                rankingData.put("rankType","seats");
+                rankingData.put("rank",rankValue);
+                rankingData.put("type",GlobalVariables.trainOrBus);
+
+                sendComment(rankingData);
+
+
+
                 Intent registerIntent = new Intent(SeatsActivity.this, CommentMenuActivity.class);
                 SeatsActivity.this.startActivity(registerIntent);
 
@@ -50,34 +77,11 @@ public class SeatsActivity extends AppCompatActivity {
         });
     }
 
-    public void ranking(String userRank){
-        String transId;
-        if(GlobalVariables.trainOrBus == "train"){
-            transId=GlobalVariables.getPosibleTrainId;
-        }else{
-            transId =GlobalVariables.posibleBus;
-        }
-        Map<String, String> postParam = new HashMap<String, String>();
-        postParam.put("userName", GlobalVariables.userName);
-        postParam.put("type",GlobalVariables.trainOrBus );
-        postParam.put("transId",transId);
-        postParam.put("longitude",GlobalVariables.longitude+"");
-        postParam.put("latitude",GlobalVariables.latitude+"");
-        postParam.put("rankType","S");
-        postParam.put("rank",userRank);
-        postParam.put("time",GlobalVariables.localTime);
-        postParam.put("route","");
-        postParam.put("TransPortName",GlobalVariables.posibleTrainName);
+    private void sendComment(Map<String, String> rankingData) {
 
-        Log.i("logging",postParam.toString());
-        sendRankingData(postParam);  // send user's location
-
-    }
-
-
-    private void sendRankingData(Map<String, String> postParam) {
         String URL ="http://54.68.91.2:8000/post/ranking";
-        JsonObjectRequest locationObject = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postParam), new Response.Listener<JSONObject>() {
+
+        JsonObjectRequest loginDitailsObject = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(rankingData), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -86,12 +90,12 @@ public class SeatsActivity extends AppCompatActivity {
                     Log.i("Login Response",response.toString());
 
                     if(status ==200 ){
-                        Toast.makeText(SeatsActivity.this, "Congratulation You have added +5 Reward points ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SeatsActivity.this, "Successfully Sent", Toast.LENGTH_SHORT).show();
 
-                    }else if(status==500){
-                        Toast.makeText(SeatsActivity.this, "Does not save location ranking data", Toast.LENGTH_SHORT).show();
+                    }else if(status==400){
+                        Toast.makeText(SeatsActivity.this, "Invalid", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(SeatsActivity.this,"1111",Toast.LENGTH_LONG).show();
+                        Toast.makeText(SeatsActivity.this,"",Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e) {
@@ -106,12 +110,13 @@ public class SeatsActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(SeatsActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeatsActivity.this, "Something wrong please try again", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });
-        NetConnection.getmInstanse(SeatsActivity.this).addToRequestQueue(locationObject);
+        NetConnection.getmInstanse(SeatsActivity.this).addToRequestQueue(loginDitailsObject);
 
     }
+
 
 }

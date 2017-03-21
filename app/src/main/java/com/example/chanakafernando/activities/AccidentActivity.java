@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.chanakafernando.activities.R;
+import com.example.chanakafernando.other.GlobalVariables;
 import com.example.chanakafernando.utills.NetConnection;
 
 import org.json.JSONException;
@@ -33,7 +34,36 @@ public class AccidentActivity extends AppCompatActivity {
 
         rbAccident.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             public void onRatingChanged(RatingBar rbAccident, float rating, boolean fromUser) {
-                String textValue =(String.valueOf((int)rating));
+                String rankValue =(String.valueOf((int)rating));
+
+
+                Map<String, String> rankingData = new HashMap<String, String>();
+                String transId ="";
+                String rootNo ="";
+                String trainName ="";
+                if(GlobalVariables.trainOrBus == "train"){
+                    transId=GlobalVariables.getPosibleTrainId;
+                    rootNo =GlobalVariables.pTrainRouteNo;
+                    trainName =GlobalVariables.posibleTrainName;
+
+                }else{
+                    transId =GlobalVariables.posibleBus;
+                    rootNo =GlobalVariables.pBusRouteNo;
+                }
+                Map<String, String> locationData = new HashMap<String, String>();
+                rankingData.put("userName", GlobalVariables.userName);
+                rankingData.put("time",GlobalVariables.localTime );
+                rankingData.put("longitude",GlobalVariables.longitude+"");
+                rankingData.put("latitude",GlobalVariables.latitude+"");
+                rankingData.put("transId",transId);
+                rankingData.put("RouteNo",rootNo);
+                rankingData.put("transName",trainName);
+                rankingData.put("rankType","accident");
+                rankingData.put("rank",rankValue);
+                rankingData.put("type",GlobalVariables.trainOrBus);
+
+                sendComment(rankingData);
+
                 Toast.makeText(AccidentActivity.this, "Congratulation You have added +5 Reward points ", Toast.LENGTH_LONG).show();
                 Intent registerIntent = new Intent(AccidentActivity.this, CommentMenuActivity.class);
                 AccidentActivity.this.startActivity(registerIntent);
@@ -49,14 +79,11 @@ public class AccidentActivity extends AppCompatActivity {
 
 
 
-    private void sendComment(Map<String, String> postParam) {
-        Map<String, String> locationData = new HashMap<String, String>();
-        locationData.put("userName", "Chanaka");
-        locationData.put("password","19941215" );
-        Log.i("logging",locationData.toString());
-        String URL ="Htt";
+    private void sendComment(Map<String, String> rankingData) {
 
-        JsonObjectRequest loginDitailsObject = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(locationData), new Response.Listener<JSONObject>() {
+        String URL ="http://54.68.91.2:8000/post/ranking";
+
+        JsonObjectRequest loginDitailsObject = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(rankingData), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -65,10 +92,10 @@ public class AccidentActivity extends AppCompatActivity {
                     Log.i("Login Response",response.toString());
 
                     if(status ==200 ){
-                        Toast.makeText(AccidentActivity.this, "Successfully Logged In", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AccidentActivity.this, "Successfully Sent", Toast.LENGTH_SHORT).show();
 
                     }else if(status==400){
-                        Toast.makeText(AccidentActivity.this, "Incorrect User Name or Password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AccidentActivity.this, "Invalid", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(AccidentActivity.this,"",Toast.LENGTH_LONG).show();
                     }
@@ -85,7 +112,7 @@ public class AccidentActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(AccidentActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccidentActivity.this, "Something wrong please try again", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });

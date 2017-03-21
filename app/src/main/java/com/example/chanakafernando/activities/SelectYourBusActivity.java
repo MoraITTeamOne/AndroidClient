@@ -62,7 +62,6 @@ public class SelectYourBusActivity extends AppCompatActivity {
                 Log.i("StartLocation",GlobalVariables.endLocation);
                 Log.i("End location",GlobalVariables.startLocation);
                 getPosibleBusList();
-
             }
         });
 
@@ -82,17 +81,32 @@ public class SelectYourBusActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 TextView busId =(TextView) view.findViewById(R.id.tvBusId);
+                TextView rootNo=(TextView) view.findViewById(R.id.tvBusRoute);
+                TextView sLoc=(TextView) view.findViewById(R.id.tvBStartPlace) ;
+                TextView eLoc=(TextView) view.findViewById(R.id.tvBusELocation);
 
-                String posibleBusId = busId.getText().toString();
-                String busRoute =busList.get(position).bRouteNo;
-                Log.i("PosibleTrain",posibleBus);
-                GlobalVariables.posibleTrainName=posibleBus;
-                GlobalVariables.pBusId=posibleBusId;
+
+
+                String busNumber = busId.getText().toString();
+                String busRoute = rootNo.getText().toString();
+                String startLocation = sLoc.getText().toString();
+                String endLocation = eLoc.getText().toString();
+
+
+                GlobalVariables.pBusId=busNumber;
                 GlobalVariables.pBusRouteNo =busRoute;
+                GlobalVariables.startLocation=startLocation;
+                GlobalVariables.endLocation=endLocation;
 
                 Log.i("AA",GlobalVariables.passWord);
                 Log.i("AA",GlobalVariables.userName);
-                Log.i("AA",GlobalVariables.trainOrBus);
+
+                Log.i("AA",GlobalVariables.pBusId);
+                Log.i("AA",GlobalVariables.pBusRouteNo);
+                Log.i("AA",GlobalVariables.startLocation);
+                Log.i("AA",GlobalVariables.endLocation);
+
+
 
                 startService(new Intent(SelectYourBusActivity.this, MyService.class));//start bakground service for send location
                 Intent registerIntent = new Intent(SelectYourBusActivity.this, WallpostActivity.class);

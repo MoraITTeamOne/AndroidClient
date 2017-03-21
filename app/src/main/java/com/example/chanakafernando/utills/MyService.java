@@ -31,8 +31,8 @@ public class MyService extends Service
 {
     private static final String TAG = "BOOMBOOMTESTGPS";
     private LocationManager mLocationManager = null;
-    private static final int LOCATION_INTERVAL = 1000;  // minute
-    private static final float LOCATION_DISTANCE = 0;  //distance in meter
+    private static final int LOCATION_INTERVAL = 2000;  // minute
+    private static final float LOCATION_DISTANCE = 1;  //distance in meter
 
     private class LocationListener implements android.location.LocationListener
     {
@@ -101,9 +101,7 @@ public class MyService extends Service
         Log.e(TAG, "onCreate");
         initializeLocationManager();
         try {
-            mLocationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
-                    mLocationListeners[1]);
+            mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE, mLocationListeners[1]);
         } catch (java.lang.SecurityException ex) {
             Log.i(TAG, "fail to request location update, ignore", ex);
         } catch (IllegalArgumentException ex) {
@@ -161,6 +159,8 @@ public class MyService extends Service
         postParam.put("latitude",lat+"");
         postParam.put("RouteNo",rootNo);
         postParam.put("time",GlobalVariables.localTime);
+        postParam.put("sLoc",GlobalVariables.startLocation);
+        postParam.put("eLoc",GlobalVariables.endLocation);
         Log.i("logging",postParam.toString());
 
         sendLocationData(postParam);  // send user's location

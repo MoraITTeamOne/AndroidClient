@@ -205,16 +205,14 @@ public class WallpostActivity extends AppCompatActivity implements NavigationVie
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_find_bus) {
 
 
-
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_find_Train) {
             Intent homeIntent = new Intent(WallpostActivity.this, DestinationActivity.class);
             WallpostActivity.this.startActivity(homeIntent);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_train_schedule) {
 
             Intent homeIntent = new Intent(WallpostActivity.this, ScheduleActivity.class);
             WallpostActivity.this.startActivity(homeIntent);
