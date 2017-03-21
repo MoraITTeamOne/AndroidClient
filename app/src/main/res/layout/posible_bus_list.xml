@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/tvBusId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="25sp"
+            android:typeface="serif"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/tvBStartPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="61dp"
+            android:layout_marginLeft="3dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="3dp"
+            app:layout_constraintRight_toLeftOf="@+id/tvBusELocation"
+            android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.136" />
+
+        <TextView
+            android:id="@+id/tvBusELocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="61dp"
+            android:text="TextView"
+            android:textSize="24sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBEtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/tvBusELocation"
+            app:layout_constraintRight_toRightOf="@+id/tvBusELocation"
+            app:layout_constraintTop_toBottomOf="@+id/tvBusELocation"
+            app:layout_constraintVertical_bias="0.074" />
+
+        <TextView
+            android:id="@+id/tvBstime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintLeft_toLeftOf="@+id/tvBStartPlace"
+            app:layout_constraintRight_toRightOf="@+id/tvBStartPlace"
+            app:layout_constraintTop_toBottomOf="@+id/tvBStartPlace"
+            app:layout_constraintVertical_bias="0.111" />
+
+        <TextView
+            android:id="@+id/tvBusRoute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:elevation="0dp"
+            android:text="00"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvBusId"
+            app:layout_constraintVertical_bias="0.88" />
+
+        <TextView
+            android:id="@+id/tvBFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FROM"
+            tools:layout_editor_absoluteY="43dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvBStartPlace"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="@+id/tvBStartPlace"
+            app:layout_constraintHorizontal_bias="0.386" />
+
+        <TextView
+            android:id="@+id/tvBTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="TO"
+            app:layout_constraintLeft_toLeftOf="@+id/tvBusELocation"
+            app:layout_constraintRight_toRightOf="@+id/tvBusELocation"
+            tools:layout_editor_absoluteY="44dp" />
+
+    </android.support.constraint.ConstraintLayout>
+</RelativeLayout>

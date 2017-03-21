@@ -61,7 +61,8 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".DestinationActivity" />
         <activity android:name=".SendPhotoActivity" />
-        <activity android:name=".ScheduleActivity"></activity>
+        <activity android:name=".ScheduleActivity" />
+        <activity android:name=".SelectYourBusActivity"></activity>
     </application>
 
 </manifest>

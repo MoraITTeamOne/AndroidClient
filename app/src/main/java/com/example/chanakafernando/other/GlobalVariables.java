@@ -19,4 +19,5 @@ public class GlobalVariables {
     public static double latitude;
     public static String pTrainRouteNo;
     public static String pBusRouteNo;
+    public static String pBusId;
 }
