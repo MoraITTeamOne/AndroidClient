@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                         GlobalVariables.trainOrBus="bus";
-                        Intent homeIntent = new Intent(LoginActivity.this, WallpostActivity.class);
+                        Intent homeIntent = new Intent(LoginActivity.this, SelectYourBusActivity.class);
                         LoginActivity.this.startActivity(homeIntent);
                     }
                 });

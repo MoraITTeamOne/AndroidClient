@@ -70,6 +70,7 @@ public class PosibleBusAdapter extends BaseAdapter {
         tvBEtime.setText(pBusList.get(position).eTime);
         tvBusRoute.setText(pBusList.get(position).bRouteNo);
 
+
         tvFrom.setText("FROM");
         tvTo.setText("TO");
 

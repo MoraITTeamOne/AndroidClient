@@ -62,7 +62,8 @@
         <activity android:name=".DestinationActivity" />
         <activity android:name=".SendPhotoActivity" />
         <activity android:name=".ScheduleActivity" />
-        <activity android:name=".SelectYourBusActivity"></activity>
+        <activity android:name=".SelectYourBusActivity" />
+        <activity android:name="com.example.chanakafernando.MainActivity"></activity>
     </application>
 
 </manifest>

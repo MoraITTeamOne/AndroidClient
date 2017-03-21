@@ -17,7 +17,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.chanakafernando.activities.R;
 import com.example.chanakafernando.other.GlobalVariables;
 import com.example.chanakafernando.other.PosibleBusList;
-import com.example.chanakafernando.other.PosibleTrainList;
 import com.example.chanakafernando.utills.MyService;
 import com.example.chanakafernando.utills.NetConnection;
 import com.example.chanakafernando.utills.PosibleBusAdapter;
@@ -37,7 +36,7 @@ public class SelectYourBusActivity extends AppCompatActivity {
     private ListView listView;
     private PosibleBusAdapter adapter;
     private List<PosibleBusList> busList;
-    public String posibleTrain;
+    public String posibleBus;
 
 
     @Override
@@ -63,14 +62,13 @@ public class SelectYourBusActivity extends AppCompatActivity {
                 Log.i("StartLocation",GlobalVariables.endLocation);
                 Log.i("End location",GlobalVariables.startLocation);
                 getPosibleBusList();
-                busList.clear();
 
             }
         });
 
 
 
-        listView = (ListView) findViewById(R.id.lvPosibleBusList);
+        listView = (ListView) findViewById(R.id.lv_bus);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_bus);
 
         busList = new ArrayList<>();
@@ -87,8 +85,8 @@ public class SelectYourBusActivity extends AppCompatActivity {
 
                 String posibleBusId = busId.getText().toString();
                 String busRoute =busList.get(position).bRouteNo;
-                Log.i("PosibleTrain",posibleTrain);
-                GlobalVariables.posibleTrainName=posibleTrain;
+                Log.i("PosibleTrain",posibleBus);
+                GlobalVariables.posibleTrainName=posibleBus;
                 GlobalVariables.pBusId=posibleBusId;
                 GlobalVariables.pBusRouteNo =busRoute;
 
@@ -112,30 +110,27 @@ public class SelectYourBusActivity extends AppCompatActivity {
 
     private void getPosibleBusList() {
         swipeRefreshLayout.setRefreshing(true);
-        String URL ="http://54.68.91.2:8000/get/pschedule/"+GlobalVariables.startLocation+"/"+GlobalVariables.endLocation+"/"+1615;
+        String URL ="http://54.68.91.2:8000/get/possible/bus/Fort/Kegalle/1200";
         JsonArrayRequest req = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
                         if (response.length() > 0) {
-                            // looping through json and adding to movies list
                             for (int i = 0; i < response.length(); i++) {
                                 try {
                                     JSONObject trainObj = response.getJSONObject(i);
 
-                                    String trainName = trainObj.getString("TrainName");
-                                    String trainId = trainObj.getString("TrainId");
+                                    String busId = trainObj.getString("busId");
                                     String sLoc = trainObj.getString("StartLocation");
                                     String sTime = trainObj.getString("StartTime");
                                     String eLoc = trainObj.getString("EndLocation");
                                     String eTime = trainObj.getString("EndTime");
-                                    String type = trainObj.getString("TrainType");
-                                    String tRouteNo  =trainObj.getString("RouteNo");
+                                    String bRouteNo  =trainObj.getString("RouteNo");
 
-                                    PosibleTrainList pTrain = new PosibleTrainList(trainId,trainName,sLoc,sTime,eLoc,eTime,type,tRouteNo);
+                                    PosibleBusList pBus = new PosibleBusList(busId,sLoc,sTime,eLoc,eTime,bRouteNo);
 
-                                    busList.add(0, pTrain);
+                                    busList.add(0, pBus);
 
 
                                 } catch (JSONException e) {
@@ -146,7 +141,6 @@ public class SelectYourBusActivity extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
                         }
 
-                        // stopping swipe refresh
                         swipeRefreshLayout.setRefreshing(false);
 
                     }
@@ -162,7 +156,6 @@ public class SelectYourBusActivity extends AppCompatActivity {
             }
         });
 
-        // Adding request to request queue
         NetConnection.getmInstanse(SelectYourBusActivity.this).addToRequestQueue(req);
 
 
