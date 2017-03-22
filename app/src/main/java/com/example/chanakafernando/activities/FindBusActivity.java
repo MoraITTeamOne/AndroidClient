@@ -1,19 +1,20 @@
 package com.example.chanakafernando.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.example.chanakafernando.activities.R;
+import android.widget.TextView;
 
 public class FindBusActivity extends AppCompatActivity {
 
-    AutoCompleteTextView autoCompleteTextView,autoCompleteTextView2;
-    EditText editText2;
-    Button button7;
+    public  AutoCompleteTextView slocationForBus, eLocationForBus ;
+    public  EditText searchTime ;
+    public  Button searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,19 +22,36 @@ public class FindBusActivity extends AppCompatActivity {
         setContentView(R.layout.activity_find_bus);
 
 
-        String [] texts= {"Galle","Matara","Jaffna","Gampaha","Kandy","Anuradapura"};
-        autoCompleteTextView=(AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,texts);
-        autoCompleteTextView.setAdapter(adapter);
+        String[] texts = {"Galle", "Matara", "Jaffna", "Gampaha", "Kandy", "Anuradapura"};
+        slocationForBus = (AutoCompleteTextView) findViewById(R.id.acTrainFrom);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, texts);
+        slocationForBus.setAdapter(adapter);
 
-        String [] text = {"Galle","Matara","Jaffna","Gampaha","Kandy","Anuradapura"};
-        autoCompleteTextView2=(AutoCompleteTextView) findViewById(R.id.autoCompleteTextView2);
-        ArrayAdapter adapte = new ArrayAdapter(this,android.R.layout.simple_list_item_1,texts);
-        autoCompleteTextView2.setAdapter(adapte);
+        String[] text = {"Galle", "Matara", "Jaffna", "Gampaha", "Kandy", "Anuradapura"};
+        eLocationForBus = (AutoCompleteTextView) findViewById(R.id.acTrainTo);
+        ArrayAdapter adapte = new ArrayAdapter(this, android.R.layout.simple_list_item_1, texts);
+        eLocationForBus.setAdapter(adapte);
+
+         final TextView searchTime =(TextView)findViewById(R.id.tvTimeTrain);
+        searchButton = (Button) findViewById(R.id.bSearchBus);
 
 
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String sLocation = slocationForBus.getText().toString();
+                String eLocation = eLocationForBus.getText().toString();
+                String time = searchButton.getText().toString();
 
 
+                Intent intent=new Intent(FindBusActivity.this,FutureScheduleActivity.class);
+                intent.putExtra("startLocation",sLocation);
+                intent.putExtra("endLocation", eLocation);
+                intent.putExtra("time", time);
+                startActivity(intent);
 
+
+            }
+        });
     }
 }

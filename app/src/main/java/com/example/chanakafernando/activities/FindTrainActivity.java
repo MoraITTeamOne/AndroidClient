@@ -1,19 +1,20 @@
 package com.example.chanakafernando.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.example.chanakafernando.activities.R;
+import android.widget.TextView;
 
 public class FindTrainActivity extends AppCompatActivity {
 
-    AutoCompleteTextView autoCompleteTextView,autoCompleteTextView2;
-    EditText editText2;
-    Button button7;
+    AutoCompleteTextView slocationForTrain,eLocationForTrain;
+    EditText Train_time;
+    Button findTrain;
 
 
     @Override
@@ -23,16 +24,32 @@ public class FindTrainActivity extends AppCompatActivity {
 
 
         String [] texts= {"Galle","Matara","Jaffna","Gampaha","Kandy","Anuradapura"};
-        autoCompleteTextView=(AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        slocationForTrain=(AutoCompleteTextView) findViewById(R.id.acTrainFrom);
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,texts);
-        autoCompleteTextView.setAdapter(adapter);
+        slocationForTrain.setAdapter(adapter);
 
         String [] text = {"Galle","Matara","Jaffna","Gampaha","Kandy","Anuradapura"};
-        autoCompleteTextView2=(AutoCompleteTextView) findViewById(R.id.autoCompleteTextView2);
+        eLocationForTrain=(AutoCompleteTextView) findViewById(R.id.acTrainTo);
         ArrayAdapter adapte = new ArrayAdapter(this,android.R.layout.simple_list_item_1,texts);
-        autoCompleteTextView2.setAdapter(adapte);
+        eLocationForTrain.setAdapter(adapte);
+        TextView time =(TextView) findViewById(R.id.tvTimeTrain);
+        Button findTrain =(Button) findViewById(R.id.bFindTrain);
 
 
+        final String sLocation = slocationForTrain.getText().toString();
+        final String eLocation = eLocationForTrain.getText().toString();
+        final String TrainTime = time.getText().toString();
+
+
+        findTrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FindTrainActivity.this, TrainScheduleActivity.class);
+                intent.putExtra("startLocation", sLocation);
+                intent.putExtra("endLocation", eLocation);
+                intent.putExtra("time", TrainTime);
+                startActivity(intent);
+            }});
 
     }
 }

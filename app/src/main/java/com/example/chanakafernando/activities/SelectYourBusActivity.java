@@ -124,7 +124,7 @@ public class SelectYourBusActivity extends AppCompatActivity {
 
     private void getPosibleBusList() {
         swipeRefreshLayout.setRefreshing(true);
-        String URL ="http://54.68.91.2:8000/get/possible/bus/Fort/Kegalle/1200";
+        String URL ="http://54.68.91.2:8000/get/possible/bus/Moratuwa/Panadura/1640";
         JsonArrayRequest req = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
                     @Override

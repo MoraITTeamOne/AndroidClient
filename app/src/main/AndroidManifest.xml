@@ -61,11 +61,12 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".DestinationActivity" />
         <activity android:name=".SendPhotoActivity" />
-        <activity android:name=".ScheduleActivity" />
         <activity android:name=".SelectYourBusActivity" />
-        <activity android:name="com.example.chanakafernando.MainActivity" />
         <activity android:name=".FindBusActivity" />
-        <activity android:name=".FindTrainActivity"></activity>
+        <activity android:name=".FindTrainActivity" />
+        <activity android:name=".FutureScheduleActivity" />
+        <activity android:name=".TrainScheduleActivity" />
+        <activity android:name=".FinalStatusTrain"></activity>
     </application>
 
 </manifest>

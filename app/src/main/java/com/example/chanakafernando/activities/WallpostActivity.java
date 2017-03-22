@@ -215,8 +215,6 @@ public class WallpostActivity extends AppCompatActivity implements NavigationVie
 
         } else if (id == R.id.nav_train_schedule) {
 
-            Intent homeIntent = new Intent(WallpostActivity.this, ScheduleActivity.class);
-            WallpostActivity.this.startActivity(homeIntent);
 
 
         } else if (id == R.id.nav_manage) {

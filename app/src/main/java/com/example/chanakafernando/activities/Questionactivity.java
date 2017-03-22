@@ -119,16 +119,6 @@ public class Questionactivity extends AppCompatActivity  {
     }
 
 
-  /*
-
-
-    @Override
-    public void onRefresh() {
-
-        getPosibleTrainList();
-    }
-*/
-
 
     private void getPosibleTrainList() {
         swipeRefreshLayout.setRefreshing(true);
